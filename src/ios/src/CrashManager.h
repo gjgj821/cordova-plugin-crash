@@ -1,6 +1,6 @@
 #import <Foundation/Foundation.h>
 
-@interface CashManager : NSObject <Crash>
+@interface CrashManager : NSObject
 
-- (void)initService:(NSString *)appKey secret:(NSString *)secret channel:(NSString *)channel version:(NSString *)appVersion;
+- (void)initService:(NSString *)appKey secret:(NSString *)secret channel:(NSString *)channel appVersion:(NSString *)appVersion;
 @end

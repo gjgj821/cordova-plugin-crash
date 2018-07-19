@@ -47,6 +47,14 @@
 			          <param name="onload" value="true"/>
             </feature>
         </config-file>
+        <config-file target="*-Info.plist" parent="GJPlugin">
+            <dict>
+              <key>CRASH_APP_KEY</key>
+              <string>$APP_KEY_IOS</string>
+              <key>CRASH_APP_SECRET</key>
+              <string>$APP_SECRET_IOS</string>
+            </dict>
+        </config-file>
 
         <pods-config ios-min-version="9.0" use-frameworks="true">
              <!-- optionally add private spec sources -->

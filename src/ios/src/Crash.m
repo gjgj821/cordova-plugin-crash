@@ -5,8 +5,8 @@
 
 @end
 @implementation Crash
-static SDK *sdk = nil;
 static CrashManager *manager = nil;
+static Crash *sdk = nil;
 
 static NSString *appKey = @"xxxxxxx"; //appId
 static NSString *secret = @"xxxxxxx"; //appSecret
@@ -28,6 +28,6 @@ static NSString *appVersion = @"1.0"; //app版本
     secret = [self.commandDelegate.settings objectForKey:[@"appSecretIos" lowercaseString]];
 
     manager = [[CrashManager alloc]init];
-    [manager initManService:appKey secret:secret channel:channel appVersion:appVersion];
+    [manager initService:appKey secret:secret channel:channel appVersion:appVersion];
 }
 @end
