@@ -62,7 +62,7 @@
             <source url="https://github.com/aliyun/aliyun-specs.git"/>
         </pods-config>
         
-        <pod name="AliHAAdapter4poc" version="10.0.5.1"/>
+        <pod name="AlicloudHA" version="1.0.1-SNAPSHOT"/>
         <pod name="FMDB" version="~> 2.5"/>
         <pod name="Reachability" version="3.1.1"/>
 

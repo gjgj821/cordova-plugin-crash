@@ -22,10 +22,12 @@ static NSString *appVersion = @"1.0"; //app版本
     NSLog(@"Crash->%@", @"init");
     
     sdk = self;
+    NSDictionary *tempInfoDict = [[NSBundle mainBundle] infoDictionary];
+    NSDictionary *tempExecutable = [tempInfoDict valueForKey:@"GJPlugin"];
+    
+    appKey = [tempExecutable objectForKey:[@"CRASH_APP_KEY" lowercaseString]];
 
-    appKey = [self.commandDelegate.settings objectForKey:[@"appKeyIos" lowercaseString]];
-
-    secret = [self.commandDelegate.settings objectForKey:[@"appSecretIos" lowercaseString]];
+    secret = [tempExecutable objectForKey:[@"CRASH_APP_SECRET" lowercaseString]];
 
     manager = [[CrashManager alloc]init];
     [manager initService:appKey secret:secret channel:channel appVersion:appVersion];
