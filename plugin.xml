@@ -67,12 +67,15 @@
     <platform name="android">
       <preference name="APP_KEY_ANDROID" default="" />
       <preference name="APP_SECRET_ANDROID" default="" />
-        <meta-data
+
+        <config-file target="AndroidManifest.xml" parent="/manifest/application">
+            <meta-data
             android:name="CRASH_APP_KEY"
             android:value="$APP_KEY_ANDROID"/>
             <meta-data
             android:name="CRASH_APP_SECRET"
             android:value="$APP_SECRET_ANDROID"/>
+        </config-file>
         <config-file target="res/xml/config.xml" parent="/*">
             <feature name="Crash" >
                 <param name="android-package" value="gj.cordova.plugin.Crash"/>
