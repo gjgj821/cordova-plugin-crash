@@ -1,7 +1,15 @@
 package gj.cordova.plugin;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.util.Log;
+
+import com.alibaba.ha.adapter.AliHaAdapter;
+import com.alibaba.ha.adapter.AliHaConfig;
+import com.alibaba.ha.adapter.Sampling;
+import com.taobao.onlinemonitor.OnLineMonitorApp;
 
 import org.apache.cordova.CallbackContext;
 import org.json.JSONArray;
@@ -12,6 +20,7 @@ import org.apache.cordova.CordovaPlugin;
 
 public class Crash extends CordovaPlugin {
     private Activity activity;
+    private Context con = null;
     private static CallbackContext callbackContext;
 
     public static String appKey = "";
@@ -21,11 +30,21 @@ public class Crash extends CordovaPlugin {
     protected void pluginInitialize() {
         Logger.d("init");
         this.activity = cordova.getActivity();
+        con = cordova.getActivity().getApplicationContext();
 
-        appKey = preferences.getString("appKeyAndroid", "");
-        appSecret = preferences.getString("appSecretAndroid", "");
+        try {
+            String packageName = con.getPackageName();
+            ApplicationInfo appInfo = con.getPackageManager().getApplicationInfo(packageName, PackageManager.GET_META_DATA);
+            if (appInfo.metaData != null) {
+                appKey = appInfo.metaData.getString("CRASH_APP_KEY");
+                appSecret = appInfo.metaData.getString("CRASH_APP_SECRET");
+                Logger.d(appKey, appSecret);
+            }
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
 
-        initManService();
+        initHa();
         // initFeedbackService();
         // initHttpDnsService();
         // initHotfix();
@@ -60,8 +79,8 @@ public class Crash extends CordovaPlugin {
     }
 
     private void initHa() {//这必须启动，否则服务端收不到数据
-        AliHaAdapter.getInstance().openPublishEmasHa();//指定启动
-        ActivityAliHaAdapter.getInstance().telescopeService.setBootPath(new String[]{activity}, System.currentTimeMillis());
+        AliHaAdapter.getInstance().openPublishEmasHa();//指定启动Activity
+        AliHaAdapter.getInstance().telescopeService.setBootPath(new String[]{activity.getLocalClassName()}, System.currentTimeMillis());
         
         //ha init
         AliHaConfig config = new AliHaConfig();
@@ -69,11 +88,29 @@ public class Crash extends CordovaPlugin {
         config.appVersion = "1.0"; //应版本
         config.channel = "base"; //渠道标记
         config.userNick = null;//意义
-        config.application = this;
-        config.context = getApplicationContext();
+        config.application = activity.getApplication();
+        config.context = activity.getBaseContext();
         config.isAliyunos = false; //是否yuno
-        sAliHaAdapter.getInstance().start(config);
+        AliHaAdapter.getInstance().start(config);
         AliHaAdapter.getInstance().utAppMonitor.changeSampling(Sampling.All); //指定数据上报例
         OnLineMonitorApp.sIsDebug = false; //OnLineMonitor模式，线上版本必须为false
-        Log.e("ha", "init");}
+        Logger.d("init ha");
+    }
+
+
+    private static class Logger {
+        private static String TAG = "Crash";
+        private static boolean DEBUG = true;
+        public static void d(String str) {
+            if (DEBUG) {
+                Log.d(TAG, str);
+            }
+        }
+
+        public static void d(String str1, String str2) {
+            if (DEBUG) {
+                Log.d(TAG, str1+":"+str2);
+            }
+        }
+    }
 }

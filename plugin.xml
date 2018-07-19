@@ -38,8 +38,8 @@
   </engines>
 
     <platform name="ios">
-      <preference name="appKeyIos" default="" />
-      <preference name="appSecretIos" default="" />
+      <preference name="APP_KEY_IOS" default="" />
+      <preference name="APP_SECRET_IOS" default="" />
 
         <config-file target="config.xml" parent="/*">
             <feature name="Crash" >
@@ -54,26 +54,32 @@
             <source url="https://github.com/aliyun/aliyun-specs.git"/>
         </pods-config>
         
-        <framework src="AliHAAdapter4poc" type="podspec" spec="10.0.5.1"/>
-        <framework src="FMDB" type="podspec" spec="~> 2.5"/>
-        <framework src="Reachability" type="podspec" spec="3.1.1"/>
+        <pod name="AliHAAdapter4poc" version="10.0.5.1"/>
+        <pod name="FMDB" version="~> 2.5"/>
+        <pod name="Reachability" version="3.1.1"/>
 
-        <header-file src="ios/src/Crash.h" target-dir="src"/>
-        <source-file src="ios/src/Crash.m" target-dir="src" />
-        <header-file src="ios/src/CrashManager.h" target-dir="src"/>
-        <source-file src="ios/src/CrashManager.m" target-dir="src" />
+        <header-file src="src/ios/src/Crash.h" target-dir="src"/>
+        <source-file src="src/ios/src/Crash.m" target-dir="src" />
+        <header-file src="src/ios/src/CrashManager.h" target-dir="src"/>
+        <source-file src="src/ios/src/CrashManager.m" target-dir="src" />
     </platform>
 
     <platform name="android">
-      <preference name="appKeyAndroid" default="" />
-      <preference name="appSecretAndroid" default="" />
-
+      <preference name="APP_KEY_ANDROID" default="" />
+      <preference name="APP_SECRET_ANDROID" default="" />
+        <meta-data
+            android:name="CRASH_APP_KEY"
+            android:value="$APP_KEY_ANDROID"/>
+            <meta-data
+            android:name="CRASH_APP_SECRET"
+            android:value="$APP_SECRET_ANDROID"/>
         <config-file target="res/xml/config.xml" parent="/*">
             <feature name="Crash" >
                 <param name="android-package" value="gj.cordova.plugin.Crash"/>
                 <param name="onload" value="true" />
             </feature>
         </config-file>
+        
 
         <source-file src="src/android/src/Crash.java" target-dir="src/gj/cordova/plugin"/>
         <framework src="src/android/crash.gradle" custom="true" type="gradleReference"/>
