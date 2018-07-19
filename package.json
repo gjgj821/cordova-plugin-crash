@@ -1,7 +1,7 @@
 {
-  "name": "cordova-plugin-emas",
+  "name": "cordova-plugin-crash",
   "version": "1.0.0",
-  "description": "Cordova Emas Plugin,use Aliyun SDK",
+  "description": "Cordova Crash Plugin,use Aliyun SDK",
   "cordova": {
     "id": "cordova-plugin-emas",
     "platforms": [
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/gjgj821/cordova-plugin-emas"
+    "url": "git+https://github.com/gjgj821/cordova-plugin-crash"
   },
   "keywords": [
     "cordova",
@@ -25,12 +25,16 @@
     {
       "name": "cordova-android",
       "version": ">=6.3.0"
+    },
+    {
+      "name": "cordova-ios",
+      "version": ">=4.5.4"
     }
   ],
   "author": "gjgj821",
   "license": "MIT License",
   "bugs": {
-    "url": "https://github.com/tubugs/cordova-plugin-emas/issues"
+    "url": "https://github.com/tubugs/cordova-plugin-crash/issues"
   },
-  "homepage": "https://github.com/tubugs/cordova-plugin-emas#readme"
+  "homepage": "https://github.com/tubugs/cordova-plugin-crash#readme"
 }
