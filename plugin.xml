@@ -39,8 +39,8 @@
   <dependency id="cordova-plugin-cocoapod-support"/>
 
     <platform name="ios">
-      <preference name="appKey" default="" />
-      <preference name="appSecret" default="" />
+      <preference name="appKeyIos" default="" />
+      <preference name="appSecretIos" default="" />
 
         <config-file target="config.xml" parent="/*">
             <feature name="Crash" >
@@ -66,8 +66,8 @@
     </platform>
 
     <platform name="android">
-      <preference name="appKey" default="" />
-      <preference name="appSecret" default="" />
+      <preference name="appKeyAndroid" default="" />
+      <preference name="appSecretAndroid" default="" />
 
         <config-file target="res/xml/config.xml" parent="/*">
             <feature name="Crash" >

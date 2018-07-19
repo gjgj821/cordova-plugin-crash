@@ -22,8 +22,8 @@ public class Crash extends CordovaPlugin {
         Logger.d("init");
         this.activity = cordova.getActivity();
 
-        appKey = preferences.getString("appKey", "");
-        appSecret = preferences.getString("appSecret", "");
+        appKey = preferences.getString("appKeyAndroid", "");
+        appSecret = preferences.getString("appSecretAndroid", "");
 
         initManService();
         // initFeedbackService();

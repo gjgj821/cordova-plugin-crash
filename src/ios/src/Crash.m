@@ -23,9 +23,9 @@ static NSString *appVersion = @"1.0"; //app版本
     
     sdk = self;
 
-    appKey = [self.commandDelegate.settings objectForKey:[@"appKey" lowercaseString]];
+    appKey = [self.commandDelegate.settings objectForKey:[@"appKeyIos" lowercaseString]];
 
-    secret = [self.commandDelegate.settings objectForKey:[@"appSecret" lowercaseString]];
+    secret = [self.commandDelegate.settings objectForKey:[@"appSecretIos" lowercaseString]];
 
     manager = [[CrashManager alloc]init];
     [manager initManService:appKey secret:secret channel:channel appVersion:appVersion];
