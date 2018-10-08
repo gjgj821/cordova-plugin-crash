@@ -36,7 +36,7 @@ public class Crash extends CordovaPlugin {
             String packageName = con.getPackageName();
             ApplicationInfo appInfo = con.getPackageManager().getApplicationInfo(packageName, PackageManager.GET_META_DATA);
             if (appInfo.metaData != null) {
-                appKey = appInfo.metaData.getString("CRASH_APP_KEY");
+                appKey = appInfo.metaData.get("CRASH_APP_KEY").toString();
                 appSecret = appInfo.metaData.getString("CRASH_APP_SECRET");
                 Logger.d(appKey, appSecret);
             }
